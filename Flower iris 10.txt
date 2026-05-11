@@ -1,0 +1,47 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load Iris Dataset
+iris = sns.load_dataset('iris')
+
+# Display first 5 rows
+print("First 5 Rows:")
+print(iris.head())
+
+# Dataset Information
+print("\nDataset Information:")
+print(iris.info())
+
+# Display feature names and types
+print("\nFeature Types:")
+print(iris.dtypes)
+
+# -----------------------------------
+# Histograms for Each Feature
+# -----------------------------------
+iris.hist(figsize=(10, 8))
+
+plt.suptitle("Histograms of Iris Features")
+
+plt.show()
+
+# -----------------------------------
+# Boxplot for Each Feature
+# -----------------------------------
+plt.figure(figsize=(10, 6))
+
+sns.boxplot(data=iris)
+
+plt.title("Boxplot of Iris Features")
+
+plt.show()
+
+# -----------------------------------
+# Inference
+# -----------------------------------
+print("\nInference:")
+print("1. Sepal and Petal measurements are numeric features.")
+print("2. Species is a nominal/categorical feature.")
+print("3. Petal features show better separation among species.")
+print("4. Sepal width contains some outliers.")
