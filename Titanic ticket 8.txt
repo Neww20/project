@@ -1,0 +1,50 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load Titanic dataset
+titanic = sns.load_dataset('titanic')
+
+# Display first 5 rows
+print("First 5 Rows:")
+print(titanic.head())
+
+# Dataset Information
+print("\nDataset Information:")
+print(titanic.info())
+
+# Check missing values
+print("\nMissing Values:")
+print(titanic.isnull().sum())
+
+# -------------------------------
+# Visualization 1: Survival Count
+# -------------------------------
+sns.countplot(x='survived', data=titanic)
+plt.title("Survival Count")
+plt.show()
+
+# -----------------------------------
+# Visualization 2: Gender vs Survival
+# -----------------------------------
+sns.countplot(x='sex', hue='survived', data=titanic)
+plt.title("Gender vs Survival")
+plt.show()
+
+# -----------------------------------------
+# Visualization 3: Passenger Class vs Survival
+# -----------------------------------------
+sns.countplot(x='class', hue='survived', data=titanic)
+plt.title("Passenger Class vs Survival")
+plt.show()
+
+# --------------------------------
+# Histogram of Fare Distribution
+# --------------------------------
+sns.histplot(titanic['fare'], bins=30)
+
+plt.title("Fare Distribution")
+plt.xlabel("Fare")
+plt.ylabel("Number of Passengers")
+
+plt.show()

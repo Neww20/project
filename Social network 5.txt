@@ -1,0 +1,94 @@
+import pandas as pd
+import numpy as np
+
+# Import required libraries
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.metrics import precision_score, recall_score, f1_score
+
+# Load dataset
+dataset = pd.read_csv("/home/coding/Documents/Dataset/PRACTICAL 5/Social_Network_Ads - Social_Network_Ads.csv")
+
+# Display first 5 rows
+print("First 5 Rows of Dataset:")
+print(dataset.head())
+
+# Dataset information
+print("\nDataset Information:")
+print(dataset.info())
+
+# Check missing values
+print("\nMissing Values:")
+print(dataset.isnull().sum())
+
+# Dataset shape
+print("\nDataset Shape:")
+print(dataset.shape)
+
+# Select independent variables
+X = dataset[['Age', 'EstimatedSalary']]
+
+# Select dependent variable
+y = dataset['Purchased']
+
+# Split dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=0
+)
+
+# Feature Scaling
+sc = StandardScaler()
+
+X_train = sc.fit_transform(X_train)
+X_test = sc.transform(X_test)
+
+# Create Logistic Regression model
+model = LogisticRegression()
+
+# Train the model
+model.fit(X_train, y_train)
+
+# Predict test results
+y_pred = model.predict(X_test)
+
+print("\nPredicted Values:")
+print(y_pred)
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+
+print("\nConfusion Matrix:")
+print(cm)
+
+# Extract TN, FP, FN, TP
+TN = cm[0][0]
+FP = cm[0][1]
+FN = cm[1][0]
+TP = cm[1][1]
+
+print("\nTrue Negative (TN):", TN)
+print("False Positive (FP):", FP)
+print("False Negative (FN):", FN)
+print("True Positive (TP):", TP)
+
+# Accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print("\nAccuracy:", accuracy)
+
+# Error Rate
+error_rate = (FP + FN) / (TP + TN + FP + FN)
+print("Error Rate:", error_rate)
+
+# Precision
+precision = precision_score(y_test, y_pred)
+print("Precision:", precision)
+
+# Recall
+recall = recall_score(y_test, y_pred)
+print("Recall:", recall)
+
+# F1 Score
+f1 = f1_score(y_test, y_pred)
+print("F1 Score:", f1)

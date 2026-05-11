@@ -1,0 +1,81 @@
+import nltk
+
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
+from nltk import pos_tag
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+# Download resources
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
+nltk.download('punkt_tab')
+nltk.download('averaged_perceptron_tagger_eng')
+
+# Sample document
+text = "Natural Language Processing is a very interesting field of Artificial Intelligence."
+
+# Tokenization
+tokens = word_tokenize(text)
+print("Tokens:")
+print(tokens)
+
+# POS Tagging
+pos = pos_tag(tokens)
+print("\nPOS Tagging:")
+print(pos)
+
+# Stop words removal
+stop_words = set(stopwords.words('english'))
+
+filtered_words = []
+
+for word in tokens:
+    if word.lower() not in stop_words:
+        filtered_words.append(word)
+
+print("\nAfter Stop Words Removal:")
+print(filtered_words)
+
+# Stemming
+ps = PorterStemmer()
+
+stemmed_words = []
+
+for word in filtered_words:
+    stemmed_words.append(ps.stem(word))
+
+print("\nStemmed Words:")
+print(stemmed_words)
+
+# Lemmatization
+lemmatizer = WordNetLemmatizer()
+
+lemmatized_words = []
+
+for word in filtered_words:
+    lemmatized_words.append(lemmatizer.lemmatize(word))
+
+print("\nLemmatized Words:")
+print(lemmatized_words)
+
+# TF-IDF
+documents = [
+    "Natural language processing is interesting",
+    "Machine learning is a part of artificial intelligence",
+    "Text analytics uses natural language processing"
+]
+
+vectorizer = TfidfVectorizer()
+
+tfidf_matrix = vectorizer.fit_transform(documents)
+
+print("\nTF-IDF Matrix:")
+print(tfidf_matrix.toarray())
+
+print("\nFeature Names:")
+print(vectorizer.get_feature_names_out())
