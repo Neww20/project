@@ -1,0 +1,45 @@
+import pandas as pd
+import numpy as np
+
+# Load dataset
+df = pd.read_csv("Iris.csv")
+
+# Display first 5 rows
+print(df.head())
+
+# Dataset information
+print(df.info())
+
+# Grouping by species
+grouped_data = df.groupby("Species")["SepalLengthCm"]
+
+# Statistical measures
+print("Mean:")
+print(grouped_data.mean())
+
+print("\nMedian:")
+print(grouped_data.median())
+
+print("\nMinimum:")
+print(grouped_data.min())
+
+print("\nMaximum:")
+print(grouped_data.max())
+
+print("\nStandard Deviation:")
+print(grouped_data.std())
+
+# Separate species
+setosa = df[df['Species'] == 'Iris-setosa']
+versicolor = df[df['Species'] == 'Iris-versicolor']
+virginica = df[df['Species'] == 'Iris-virginica']
+
+# Describe each species
+print("\nStatistics of Iris-setosa")
+print(setosa.describe())
+
+print("\nStatistics of Iris-versicolor")
+print(versicolor.describe())
+
+print("\nStatistics of Iris-virginica")
+print(virginica.describe())
