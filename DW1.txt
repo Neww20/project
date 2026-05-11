@@ -1,0 +1,47 @@
+# =====================================
+# Experiment 1 : Data Wrangling I
+# =====================================
+
+# Step 1 : Import Required Libraries
+import pandas as pd
+import numpy as np
+
+# Step 2 : Load Dataset
+df = pd.read_csv("Titanic.csv")
+
+# Step 3 : Display First 5 Rows
+print("First 5 Rows of Dataset:\n")
+print(df.head())
+
+# Step 4 : Check Missing Values
+print("\nMissing Values in Dataset:\n")
+print(df.isnull().sum())
+
+# Step 5 : Display Statistical Information
+print("\nStatistical Summary:\n")
+print(df.describe())
+
+# Step 6 : Check Dimensions of Dataset
+print("\nShape of Dataset:")
+print(df.shape)
+
+# Step 7 : Check Datatypes
+print("\nDatatypes of Columns:\n")
+print(df.dtypes)
+
+# Step 8 : Convert Age Column into Float
+df['Age'] = df['Age'].astype(float)
+
+# Step 9 : Convert Survived Column into Integer
+df['Survived'] = df['Survived'].astype(int)
+
+# Step 10 : Convert Categorical Variable into Numeric
+df['Sex'] = df['Sex'].map({'male': 0, 'female': 1})
+
+# Step 11 : Display Updated Dataset
+print("\nDataset after Formatting and Encoding:\n")
+print(df.head())
+
+# Step 12 : Display Dataset Information
+print("\nDataset Information:\n")
+df.info()
